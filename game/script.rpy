@@ -27,37 +27,22 @@ default saw_hideo_secret = False
 default visited_shrine = False
 
 
-# =========================================================
-# START
-# =========================================================
+#start
 
 label start:
-
     scene black
     with fade
-
     pause 1.0
-
     centered "{size=52}THE MIMIC{/size}"
-
     pause 1.5
-
     centered "{size=28}A Hideo Story{/size}"
-
     pause 2.0
-
     centered "{i}There was a time when monsters were only stories.{/i}"
-
     pause 2.0
-
     centered "{i}That time is over.{/i}"
-
     pause 2.5
 
-
-    # -----------------------------------------------------
-    # PLAYER NAME
-    # -----------------------------------------------------
+    #player name input
 
     $ player_name = renpy.input(
         "What is your name?",
@@ -71,9 +56,7 @@ label start:
         $ player_name = "Akari"
 
 
-    # =====================================================
-    # CANON LORE INTRO
-    # =====================================================
+    #lore intro
 
     scene black
     with fade
@@ -192,9 +175,7 @@ label start:
     jump chapter_one
 
 
-# =========================================================
-# CHAPTER ONE
-# =========================================================
+#chapter one
 
 label chapter_one:
 
@@ -380,9 +361,7 @@ label chapter_one:
     h "Only when people are lost."
 
 
-# =========================================================
-# FIRST WALK WITH HIDEO
-# =========================================================
+#first walk with hideo
 
     scene bg village_path_day
     with dissolve

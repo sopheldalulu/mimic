@@ -351,30 +351,56 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
-
-    ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background
+    # Background image
+    add "gui/main_menu_bg.png"
 
-    ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
+    # Dark overlay so text is easier to read
+    add Solid("#00000066")
 
-    ## The use statement includes another screen inside this one. The actual
-    ## contents of the main menu are in the navigation screen.
-    use navigation
+    # Title
+    text "THE BOY BENEATH THE MASK":
+        xalign 0.5
+        yalign 0.18
+        size 58
+        color "#ffffff"
+        outlines [(3, "#000000", 0, 0)]
 
-    if gui.show_name:
+    # Subtitle
+    text "A supernatural horror romance":
+        xalign 0.5
+        yalign 0.27
+        size 24
+        color "#d6c8c8"
+        italic True
+        outlines [(2, "#000000", 0, 0)]
 
-        vbox:
-            style "main_menu_vbox"
+    # Menu buttons
+    vbox:
+        xalign 0.5
+        yalign 0.62
+        spacing 18
 
-            text "[config.name!t]":
-                style "main_menu_title"
+        textbutton "START":
+            action Start()
+            xalign 0.5
 
-            text "[config.version]":
-                style "main_menu_version"
+        textbutton "LOAD":
+            action ShowMenu("load")
+            xalign 0.5
+
+        textbutton "PREFERENCES":
+            action ShowMenu("preferences")
+            xalign 0.5
+
+        textbutton "ABOUT":
+            action ShowMenu("about")
+            xalign 0.5
+
+        textbutton "QUIT":
+            action Quit(confirm=True)
+            xalign 0.5
 
 
 style main_menu_frame is empty
