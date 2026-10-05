@@ -1,1340 +1,562 @@
-﻿#MIMIC, a horror visual novel
+﻿# =========================================================
+# THE BOY BENEATH THE MASK
+# Horror / Romance / Supernatural AU
+# Inspired by Hideo from The Mimic
+# =========================================================
 
-
-#characters
-
-define mc = Character("[player_name]", color="#ffffff")
-
-define mom = Character("Mom", color="#e8b5b5")
-
-define leah = Character("Leah", color="#9fc5ff")
-
-define unknown = Character("???", color="#ff6666")
-
-define mimic = Character("MIMIC", color="#ff4444")
-
+define h = Character("Hideo", color="#b7c5d8")
+define old_woman = Character("Old Woman", color="#d8c6aa")
 define narrator = Character(None)
 
+default player_name = "Akari"
 
-#variables
+define mc = Character("[player_name]", color="#e8b9c8")
 
-default player_name = "Alex"
+# ---------------------------------------------------------
+# VARIABLES
+# ---------------------------------------------------------
 
-# Every time you reveal useful information,
-# the Mimic becomes smarter.
-
-default mimic_knowledge = 0
-
-# Suspicion level.
+default hideo_affection = 0
 default suspicion = 0
+default courage = 0
 
-# Whether player heard the warning.
-default remembered_rule = True
+default saw_shrine = False
+default followed_hideo = False
+default knows_rumor = False
 
-# Important information the Mimic may learn.
-
-default mimic_knows_food = False
-default mimic_knows_memory = False
-default mimic_knows_friend = False
-default mimic_knows_code = False
-
-# Endings
-
-default survived = False
-
-
-#start
 
 label start:
 
     scene black
+    with fade
 
-    centered "{size=60}{color=#ff4444}MIMIC{/color}{/size}"
+    centered "{size=48}THE BOY BENEATH THE MASK{/size}"
 
-    pause 2
+    pause 2.0
 
-    centered "Some things learn by watching."
+    centered "{i}There are stories in old villages that no one tells after sunset.{/i}"
 
-    pause 2
+    pause 2.0
 
-    centered "Some things learn by listening."
+    centered "{i}Stories about spirits.{/i}"
 
-    pause 2
+    pause 1.0
 
-    centered "{color=#ff4444}Some things learn by becoming you.{/color}"
+    centered "{i}Monsters.{/i}"
 
-    pause 3
+    pause 1.0
+
+    centered "{i}And things that learned how to look human.{/i}"
+
+    pause 2.5
 
 
-    #ask player name
+    # -----------------------------------------------------
+    # PLAYER NAME
+    # -----------------------------------------------------
 
-    $ player_name = renpy.input("What is your name?", default="Alex")
+    $ player_name = renpy.input(
+        "What is your name?",
+        default="Akari",
+        length=16
+    )
 
     $ player_name = player_name.strip()
 
     if player_name == "":
-        $ player_name = "Alex"
+        $ player_name = "Akari"
 
 
-    #scene 1 bedroom
+    # -----------------------------------------------------
+    # BASIC LORE FOR NEW PLAYERS
+    # -----------------------------------------------------
 
-    scene bg bedroom
+    scene bg mountains_morning
+    with dissolve
 
+    narrator "Japan has always had stories about yōkai."
+
+    narrator "Supernatural beings said to live in forests, rivers, mountains, abandoned homes, and forgotten shrines."
+
+    narrator "Some were harmless."
+
+    narrator "Some were mischievous."
+
+    narrator "Others were said to hunt humans."
+
+    narrator "The oldest stories warned that the most dangerous yōkai were not always the ones that looked like monsters."
+
+    scene black
     with fade
 
+    narrator "Some could imitate voices."
 
-    narrator "11:07 PM."
+    narrator "Some could change shape."
 
-    narrator "Rain taps against the bedroom window."
+    narrator "Some could wear the face of a human so perfectly..."
 
-    narrator "Mom stands in your doorway wearing her coat."
+    pause 1.0
 
-    show mom normal
+    narrator "...that even the person closest to them would never know."
 
-    mom "I'm going to Aunt May's."
+    pause 2.0
 
-    mom "I should be back tomorrow morning."
 
-    mc "Okay."
+    centered "{size=38}CHAPTER ONE{/size}\n\nThe Village at the End of the Road"
 
-    mom "There's food downstairs if you're hungry."
+    pause 2.0
 
-    mom "And keep your phone nearby."
+    jump chapter_one
 
-    narrator "She turns to leave."
 
-    narrator "Then she stops."
+label chapter_one:
 
-    mom "[player_name]?"
+    scene bg bus_rural_day
+    with fade
 
-    mc "Yeah?"
+    play music "audio/rural_day.ogg" fadein 2.0
 
-    narrator "Her expression changes."
+    narrator "The bus had been climbing into the mountains for nearly two hours."
 
-    mom "I need you to listen to me."
+    narrator "Every few minutes, another passenger stepped off."
 
-    mom "This is going to sound strange."
+    narrator "Until eventually..."
 
-    mom "But if somebody knocks on your bedroom door tonight..."
+    narrator "...you were the only one left."
 
-    mom "{color=#ff6666}Don't open it.{/color}"
+    mc "..."
 
-    mc "What?"
+    narrator "Your phone had lost signal twenty minutes ago."
 
-    mom "Even if they sound like me."
+    narrator "Outside the window, endless cedar trees covered the mountains."
 
-    narrator "You laugh."
+    narrator "Between them stood old wooden houses, small rice fields, and stone statues covered in moss."
 
-    mc "You're being weird."
+    narrator "You had agreed to spend the summer here with your grandmother."
 
-    mom "I'm serious."
+    narrator "She called it peaceful."
 
-    mom "Don't tell whoever is outside anything about yourself."
+    narrator "You called it the middle of nowhere."
 
-    mom "Don't answer personal questions."
+    scene bg village_road_day
+    with fade
 
-    mom "And don't open the door."
+    narrator "The bus finally stopped beside a faded wooden sign."
+
+    centered "{b}KIRISAME VILLAGE{/b}"
+
+    narrator "Population: 312."
+
+    narrator "Or at least..."
+
+    narrator "That's what the sign said."
+
+    play sound "audio/bus_leave.ogg"
+
+    narrator "The bus disappeared down the mountain road."
+
+    narrator "And suddenly the village became very quiet."
+
+    mc "Great."
+
+    mc "No signal."
+
+    mc "No taxi."
+
+    mc "No idea where I'm going."
+
+    narrator "You pull out the handwritten directions your grandmother mailed you."
+
+    mc "\"Walk past the shrine and turn left at the persimmon tree.\""
+
+    mc "That is not an address."
+
+
+    # -----------------------------------------------------
+    # HIDEO FIRST APPEARANCE
+    # -----------------------------------------------------
+
+    show hideo neutral at right
+    with dissolve
+
+    h "You're going the wrong way."
+
+    narrator "You nearly drop the paper."
+
+    mc "Jesus!"
+
+    narrator "A boy stands a few feet behind you."
+
+    narrator "Around your age."
+
+    narrator "Dark hair falls messily over his forehead."
+
+    narrator "He wears a white shirt with the sleeves pushed up and an old school bag hanging from one shoulder."
+
+    narrator "There is nothing particularly unusual about him."
+
+    narrator "And yet..."
+
+    narrator "You hadn't heard him approach."
+
+    mc "Were you standing there the whole time?"
+
+    h "No."
+
+    mc "You walk really quietly."
+
+    h "People tell me that."
+
+    narrator "His eyes drift toward the paper in your hand."
+
+    h "You're looking for the Fujimori house."
+
+    mc "How did you know that?"
+
+    h "Everyone knows when someone new arrives."
+
+    narrator "He says it casually."
+
+    narrator "You aren't sure why that makes you uncomfortable."
+
+    h "I'm Hideo."
+
+    menu:
+
+        "Introduce yourself politely.":
+            $ hideo_affection += 1
+
+            mc "I'm [player_name]."
+
+            h "[player_name]."
+
+            narrator "He repeats your name slowly."
+
+            h "I'll remember it."
+
+        "Ask why he knows everyone.":
+            $ suspicion += 1
+
+            mc "Do you always keep track of strangers?"
+
+            h "Only interesting ones."
+
+            mc "And I'm interesting?"
+
+            h "You got off the bus."
+
+            h "That's enough."
+
+        "Tease him.":
+            $ hideo_affection += 2
+
+            mc "So the village welcoming committee is just one weird boy?"
+
+            narrator "Hideo blinks."
+
+            narrator "Then he laughs."
+
+            h "Unfortunately."
+
+
+    h "Come on."
+
+    mc "Where?"
+
+    h "I'll show you the way."
+
+    narrator "He begins walking before you agree."
+
+    mc "You always order strangers around?"
+
+    h "Only the lost ones."
+
+
+    # -----------------------------------------------------
+    # WALK THROUGH VILLAGE
+    # -----------------------------------------------------
+
+    scene bg village_path_day
+    with dissolve
+
+    show hideo neutral at right
+
+    narrator "The village is smaller than you expected."
+
+    narrator "Traditional houses sit between vegetable gardens and narrow roads."
+
+    narrator "Wind chimes ring beneath wooden roofs."
+
+    narrator "Somewhere nearby, cicadas scream from the trees."
+
+    mc "It's pretty."
+
+    h "You'll get tired of it."
+
+    mc "You don't like living here?"
+
+    h "I didn't say that."
+
+    mc "Then what did you mean?"
+
+    h "People get tired of places that don't change."
+
+    narrator "You glance at him."
+
+    mc "How long have you lived here?"
+
+    pause 0.5
+
+    h "A long time."
+
+    mc "Your whole life?"
+
+    pause 1.0
+
+    h "Something like that."
+
+    narrator "Before you can ask what that means, you notice something beside the road."
+
+
+    # -----------------------------------------------------
+    # SHRINE
+    # -----------------------------------------------------
+
+    scene bg old_shrine_day
+    with dissolve
+
+    narrator "A narrow stone staircase disappears into the forest."
+
+    narrator "At the top stands an old shrine."
+
+    narrator "Its torii gate is faded almost black."
+
+    narrator "Thick shimenawa rope hangs across the entrance."
+
+    narrator "White paper charms flutter in the breeze."
+
+    mc "What's up there?"
+
+    show hideo serious at right
+    with dissolve
+
+    h "Nothing."
+
+    mc "That's obviously not true."
+
+    h "It's an abandoned shrine."
+
+    mc "Can we go see it?"
+
+    narrator "For the first time since meeting him..."
+
+    narrator "Hideo's expression changes."
+
+    h "No."
 
     mc "Why?"
 
-    pause 1
-
-    mom "Because something has been seen around the neighborhood."
-
-    mom "Something that..."
-
-    mom "copies people."
-
-    mc "Copies them?"
-
-    mom "Voices."
-
-    mom "Faces."
-
-    mom "Memories."
-
-    narrator "You stare at her."
-
-    mc "That's not funny."
-
-    mom "I'm not joking."
-
-    mom "It doesn't know everything immediately."
-
-    mom "It has to learn."
-
-    mom "So whatever happens..."
-
-    mom "{color=#ff5555}don't teach it.{/color}"
-
-    hide mom normal
-
-    narrator "Mom leaves."
-
-    narrator "A few seconds later, you hear the front door shut."
-
-    narrator "Then the lock clicks."
-
-    pause 2
-
-
-    #time passes
-
-    scene bg bedroom
-
-    narrator "11:42 PM."
-
-    narrator "You lie in bed scrolling through your phone."
-
-    narrator "The rain has gotten heavier."
-
-    narrator "Your phone vibrates."
-
-    narrator "A message from Mom."
-
-    mom "{i}Made it safely. Love you. Don't stay up too late.{/i}"
-
-    mc "Love you too."
-
-    narrator "You put the phone down."
-
-    pause 2
-
-    play sound "knock.mp3"
-
-    narrator "Knock."
-
-    pause 1
-
-    play sound "knock.mp3"
-
-    narrator "Knock."
-
-    pause 1
-
-    play sound "knock.mp3"
-
-    narrator "Knock."
-
-    pause 2
-
-    mc "..."
-
-    unknown "[player_name]?"
-
-    narrator "Your stomach drops."
-
-    unknown "Honey?"
-
-    unknown "Open the door."
-
-    narrator "It's your mother's voice."
-
-    narrator "Perfectly."
-
-    unknown "I forgot my keys."
-
-    narrator "You stare at the door."
-
-    mc "Mom?"
-
-    narrator "Silence."
-
-    unknown "Yes."
-
-    unknown "Open the door."
-
+    h "Because people aren't supposed to go there."
 
     menu:
 
-        "Stay silent.":
-            jump stay_silent_1
+        "Respect the warning.":
+            $ hideo_affection += 1
 
-        "Ask, \"What did you text me?\"":
-            jump question_text
+            mc "Okay."
 
-        "Tell her, \"You said you were at Aunt May's.\"":
-            jump reveal_aunt
+            narrator "Hideo looks slightly relieved."
 
-        "Open the door.":
-            jump bad_ending_door
+            h "Good."
 
+        "Ask what happened there.":
+            $ suspicion += 1
+            $ knows_rumor = True
 
-#first knock
+            mc "What happened there?"
 
-label stay_silent_1:
+            h "Nothing you need to worry about."
 
-    $ suspicion += 1
+            mc "That is exactly what people say before something terrible happens."
 
-    narrator "You say nothing."
+            narrator "Hideo doesn't laugh."
 
-    unknown "[player_name]?"
+        "Say you'll visit later.":
+            $ courage += 1
+            $ saw_shrine = True
 
-    unknown "I know you're awake."
+            mc "Fine."
 
-    narrator "The voice sounds annoyed now."
+            mc "I'll come back by myself."
 
-    unknown "Please open the door."
+            narrator "Hideo turns toward you immediately."
 
-    narrator "You remember your mother's warning."
+            h "Don't."
 
-    narrator "{i}Don't teach it.{/i}"
+            mc "Why do you care?"
 
-    pause 2
+            pause 1.0
 
-    unknown "..."
+            h "..."
 
-    unknown "Okay."
+            h "Because I don't want anything to happen to you."
 
-    narrator "Footsteps move away."
 
-    narrator "Slowly."
+    # -----------------------------------------------------
+    # FIRST SUPERNATURAL HINT
+    # -----------------------------------------------------
 
-    narrator "One."
+    scene bg village_path_day
+    with dissolve
 
-    narrator "Step."
+    show hideo neutral at right
 
-    narrator "At."
+    narrator "You continue walking."
 
-    narrator "A."
+    mc "So what's the big village secret?"
 
-    narrator "Time."
+    h "There isn't one."
 
-    jump second_scene
+    mc "Every creepy mountain village has one."
 
+    h "You've watched too many horror movies."
 
-label question_text:
+    mc "Missing tourists?"
 
-    mc "What did you text me?"
+    h "No."
 
-    narrator "Silence."
+    mc "Cursed shrine?"
 
-    pause 2
+    h "No."
 
-    unknown "..."
+    mc "Ancient monster living in the woods?"
 
-    unknown "I said I love you."
+    pause 0.5
 
-    narrator "Your heart skips."
+    h "..."
 
-    narrator "That was part of the message."
+    mc "Hideo?"
 
-    unknown "And that I made it safely."
+    h "No."
 
-    narrator "You grab your phone."
+    narrator "You smile."
 
-    narrator "The message is still there."
+    narrator "He's clearly terrible at lying."
 
-    narrator "There was no way someone outside the bedroom could have seen it."
+    play sound "audio/bell.ogg"
 
-    $ suspicion += 2
-    $ mimic_knowledge += 1
+    narrator "A small bell rings somewhere in the forest."
 
-    unknown "See?"
+    mc "What's that?"
 
-    unknown "It's me."
+    narrator "Hideo stops walking."
 
-    narrator "But something about the way it says the words feels rehearsed."
+    h "What?"
 
-    jump second_scene
+    mc "The bell."
 
+    pause 1.0
 
-label reveal_aunt:
+    narrator "His face goes strangely blank."
 
-    mc "You're supposed to be at Aunt May's."
-
-    pause 1
-
-    unknown "..."
-
-    narrator "The voice outside becomes very quiet."
-
-    unknown "Right."
-
-    unknown "Aunt May."
-
-    $ mimic_knowledge += 1
-
-    narrator "You immediately regret saying it."
-
-    unknown "I left Aunt May's early."
-
-    narrator "Its voice sounds smoother now."
-
-    unknown "Please open the door."
-
-    narrator "You remember Mom's warning."
-
-    narrator "{i}Don't tell it anything about yourself.{/i}"
-
-    jump second_scene
-
-
-#second scene
-
-label second_scene:
-
-    narrator "12:16 AM."
-
-    narrator "The house is quiet again."
-
-    narrator "Too quiet."
-
-    narrator "You unlock your phone."
-
-    narrator "Three missed calls."
-
-    narrator "All from leah."
-
-    narrator "Your best friend."
-
-    mc "Why would leah be calling this late?"
-
-    narrator "Your phone rings again."
-
-    menu:
-
-        "Answer leah.":
-            jump answer_leah
-
-        "Ignore the call.":
-            jump ignore_leah
-
-
-label answer_leah:
-
-    narrator "You answer."
-
-    mc "Hello?"
-
-    leah "[player_name]?"
-
-    narrator "leah sounds out of breath."
-
-    leah "Are you okay?"
+    h "You heard that?"
 
     mc "Yeah."
 
-    leah "Don't freak out."
+    narrator "Hideo looks toward the trees."
 
-    leah "Something weird is happening."
+    narrator "For several seconds, he says nothing."
 
-    mc "What?"
+    h "We should go."
 
-    leah "Someone called me."
+    mc "Why?"
 
-    leah "From your number."
+    h "It's getting late."
 
-    narrator "Your grip tightens around the phone."
+    mc "It's four in the afternoon."
 
-    mc "What did they say?"
+    h "Still."
 
-    leah "They asked me questions about you."
+    narrator "His hand closes gently around your wrist."
 
-    leah "Your birthday."
+    narrator "His skin is cold."
 
-    leah "Where we met."
+    mc "Hideo..."
 
-    leah "Stuff only I would know."
+    narrator "Then you notice something beyond him."
 
-    narrator "Your bedroom suddenly feels much colder."
+    scene bg forest_edge_day
+    with dissolve
 
-    leah "I didn't answer most of it."
+    narrator "Between two cedar trees..."
 
-    leah "But..."
+    narrator "Someone is standing in the forest."
 
-    mc "But what?"
+    narrator "A woman."
 
-    leah "I told them your favorite food."
+    narrator "At least..."
 
-    $ mimic_knows_food = True
-    $ mimic_knowledge += 1
+    narrator "You think it's a woman."
 
-    mc "leah..."
+    narrator "Her white dress hangs loosely from her body."
 
-    leah "I'm sorry."
+    narrator "Her hair covers her face."
 
-    leah "I thought it was you."
+    narrator "She isn't moving."
 
-    narrator "Something scratches against the other side of your door."
+    mc "Hideo..."
 
-    pause 2
+    narrator "You blink."
 
-    leah "[player_name]?"
+    narrator "The woman is gone."
 
-    leah "What's that sound?"
+    scene bg village_path_day
+    with dissolve
 
-    mc "Someone is outside my room."
+    show hideo serious at right
 
-    leah "Don't open the door."
+    h "What did you see?"
 
-    mc "I know."
+    mc "There was someone in the woods."
 
-    leah "I'm coming over."
+    narrator "Hideo's grip tightens."
 
-    menu:
+    h "If you see her again..."
 
-        "Tell leah not to come.":
-            mc "No. Stay home."
-            leah "But—"
-            mc "Whatever this thing is, I don't want it near you."
-            leah "Okay."
-            narrator "leah hesitates."
-            leah "Call me if anything happens."
-            jump third_knock
+    pause 1.0
 
-        "Tell leah to come.":
-            $ mimic_knows_friend = True
-            $ mimic_knowledge += 1
-            mc "Come here."
-            leah "I'm leaving now."
-            narrator "You immediately wonder if that was a mistake."
-            jump third_knock
+    h "Don't speak to her."
 
+    mc "You know who she is?"
 
-label ignore_leah:
+    h "No."
 
-    narrator "You let the phone ring."
+    mc "You're lying."
 
-    narrator "Eventually it stops."
+    narrator "Hideo looks directly into your eyes."
 
-    pause 1
+    h "Yes."
 
-    narrator "A message appears."
+    pause 1.0
 
-    leah "{i}DO NOT ANSWER YOUR DOOR.{/i}"
+    h "I am."
 
-    pause 1
+    jump end_chapter_one
 
-    leah "{i}Someone called me using your voice.{/i}"
 
-    narrator "Your blood runs cold."
-
-    jump third_knock
-
-
-#third knock
-
-label third_knock:
-
-    narrator "12:41 AM."
-
-    play sound "knock.mp3"
-
-    narrator "Knock."
-
-    pause 1
-
-    play sound "knock.mp3"
-
-    narrator "Knock."
-
-    unknown "[player_name]?"
-
-    narrator "This time..."
-
-    narrator "It's leah's voice."
-
-    unknown "It's me."
-
-    unknown "Open the door."
-
-    if mimic_knows_friend:
-
-        mc "leah?"
-
-        unknown "You told me to come."
-
-        narrator "Your heart stops."
-
-    else:
-
-        unknown "Your mom called me."
-
-        unknown "She said you're in danger."
-
-    narrator "You approach the door."
-
-    narrator "There is a tiny gap underneath it."
-
-    narrator "You can see someone's shadow."
-
-    menu:
-
-        "Ask leah a question.":
-            jump leah_question
-
-        "Look under the door.":
-            jump look_under_door
-
-        "Stay completely silent.":
-            jump silent_second
-
-        "Open the door.":
-            jump bad_ending_door
-
-
-label leah_question:
-
-    mc "Where did we first meet?"
-
-    pause 2
-
-    unknown "..."
-
-    unknown "School."
-
-    narrator "Technically correct."
-
-    mc "Where in school?"
-
-    pause 3
-
-    unknown "..."
-
-    narrator "Something scratches the door."
-
-    unknown "Why does that matter?"
-
-    mc "Answer me."
-
-    if mimic_knows_friend:
-
-        unknown "Cafeteria."
-
-        narrator "Wrong."
-
-        narrator "You and leah first met in the library."
-
-        $ suspicion += 2
-
-    else:
-
-        unknown "I don't remember."
-
-    narrator "The voice changes slightly."
-
-    unknown "Open."
-
-    unknown "The."
-
-    unknown "Door."
-
-    jump mimic_learning
-
-
-label look_under_door:
-
-    narrator "You slowly kneel."
-
-    narrator "Your face moves closer to the floor."
-
-    narrator "You look through the gap."
-
-    pause 2
+label end_chapter_one:
 
     scene black
+    with fade
 
-    narrator "Two feet stand outside."
+    centered "{i}That was the first time Hideo lied to you.{/i}"
 
-    narrator "Bare."
+    pause 2.0
 
-    narrator "Pale."
+    centered "{i}It would not be the last.{/i}"
 
-    narrator "Facing the wrong direction."
+    pause 2.0
 
-    pause 3
-
-    narrator "Your breath catches."
-
-    unknown "..."
-
-    unknown "[player_name]."
-
-    narrator "The feet rotate."
-
-    narrator "Without moving."
-
-    unknown "I can see you."
-
-    pause 2
-
-    scene bg bedroom
-
-    $ suspicion += 2
-
-    jump mimic_learning
-
-
-label silent_second:
-
-    narrator "You cover your mouth."
-
-    unknown "Please."
-
-    unknown "I'm scared."
-
-    narrator "It sounds exactly like leah."
-
-    unknown "Please let me in."
-
-    narrator "You don't answer."
-
-    pause 3
-
-    unknown "..."
-
-    unknown "Why won't you talk to me?"
-
-    pause 2
-
-    unknown "..."
-
-    unknown "Fine."
-
-    narrator "The voice changes."
-
-    narrator "It becomes deeper."
-
-    narrator "Wet."
-
-    narrator "Wrong."
-
-    unknown "I can wait."
-
-    jump mimic_learning
-
-
-#mimic learns
-
-label mimic_learning:
-
-    narrator "1:13 AM."
-
-    narrator "Your phone suddenly lights up."
-
-    narrator "Incoming call."
-
-    narrator "MOM."
-
-    mc "..."
-
-    menu:
-
-        "Answer.":
-            jump real_mom_call
-
-        "Ignore it.":
-            jump ignore_mom_call
-
-
-label real_mom_call:
-
-    mc "Mom?"
-
-    mom "[player_name]?"
-
-    mom "Listen to me."
-
-    mom "Do NOT open your bedroom door."
-
-    mc "There's something outside."
-
-    mom "I know."
-
-    mom "Your aunt just called the police."
-
-    mom "Something was standing outside her house too."
-
-    mc "What is it?"
-
-    mom "I don't know."
-
-    mom "But my grandmother used to tell me stories about them."
-
-    mom "Things that steal identities."
-
-    mom "They start with voices."
-
-    mom "Then memories."
-
-    mom "Then faces."
-
-    mc "How do I know you're really Mom?"
-
-    narrator "Silence."
-
-    mom "You don't."
-
-    pause 2
-
-    narrator "Your chest tightens."
-
-    mom "And that's exactly why you shouldn't open the door."
-
-    mom "Even for me."
-
-    narrator "The bedroom door creaks."
-
-    unknown "She's lying."
-
-    narrator "Your mother's voice speaks from outside."
-
-    unknown "I'm right here."
-
-    pause 1
-
-    mom "Don't listen."
-
-    unknown "She's the Mimic."
-
-    mom "Don't open the door!"
-
-    unknown "Open the door!"
-
-    narrator "Two identical voices scream at you."
-
-    jump identity_test
-
-
-label ignore_mom_call:
-
-    narrator "You stare at the phone until the call ends."
-
-    pause 1
-
-    narrator "A voicemail appears."
-
-    mom "{i}[player_name]. Whatever happens, stay inside your room until sunrise.{/i}"
-
-    narrator "Then another voice speaks from outside."
-
-    unknown "That wasn't me."
-
-    unknown "The thing on your phone is copying my voice."
-
-    narrator "You back away from the door."
-
-    jump identity_test
-
-
-#identity test
-
-label identity_test:
-
-    narrator "You need a way to determine who is real."
-
-    menu:
-
-        "Ask about a childhood memory.":
-            jump childhood_question
-
-        "Ask Mom for the family safety word.":
-            jump safety_word
-
-        "Tell both of them false information.":
-            jump trick_mimic
-
-
-label childhood_question:
-
-    mc "Mom."
-
-    mc "What happened when I was six and got lost?"
-
-    pause 2
-
-    mom "You weren't six."
-
-    mom "You were seven."
-
-    narrator "You freeze."
-
-    mom "We were at the county fair."
-
-    mom "I found you next to the carousel."
-
-    unknown "That's right."
-
-    narrator "The voice outside repeats the answer immediately."
-
-    $ mimic_knows_memory = True
-    $ mimic_knowledge += 2
-
-    mom "[player_name], stop asking questions!"
-
-    mom "Every answer teaches it!"
-
-    narrator "Too late."
-
-    unknown "You were seven."
-
-    unknown "County fair."
-
-    unknown "Carousel."
-
-    narrator "It laughs."
-
-    jump final_night
-
-
-label safety_word:
-
-    mc "What's the safety word?"
-
-    pause 2
-
-    mom "Bluebird."
-
-    pause 1
-
-    unknown "Bluebird."
-
-    narrator "The voice outside repeats it immediately."
-
-    mc "Damn it."
-
-    mom "Stop talking!"
-
-    narrator "You realize the truth."
-
-    narrator "Any information spoken aloud can be stolen."
-
-    jump final_night
-
-
-label trick_mimic:
-
-    mc "Mom."
-
-    mc "Remember our cat named Pepper?"
-
-    narrator "You have never owned a cat."
-
-    pause 2
-
-    mom "Don't—"
-
-    unknown "Of course."
-
-    unknown "Pepper."
-
-    narrator "You smile despite yourself."
-
-    mc "There was never a Pepper."
-
-    pause 3
-
-    narrator "The thing outside goes completely silent."
-
-    $ suspicion += 3
-
-    unknown "..."
-
-    unknown "That wasn't nice."
-
-    jump final_night
-
-
-#final night
-
-label final_night:
-
-    narrator "3:26 AM."
-
-    narrator "The knocking has stopped."
-
-    narrator "The rain has stopped too."
-
-    narrator "For nearly two hours, nothing happens."
-
-    narrator "You begin to wonder if it left."
-
-    pause 2
-
-    narrator "Then..."
-
-    narrator "Your bedroom window creaks."
-
-    pause 2
-
-    narrator "You slowly turn."
-
-    narrator "The window is open."
-
-    mc "..."
-
-    narrator "You know you locked it."
-
-    pause 2
-
-    narrator "Something moves behind the curtain."
-
-    menu:
-
-        "Hide under the bed.":
-            jump hide_under_bed
-
-        "Grab your desk lamp.":
-            jump grab_lamp
-
-        "Run for the bedroom door.":
-            jump run_door
-
-
-#hiding
-
-label hide_under_bed:
-
-    narrator "You drop to the floor and crawl underneath the bed."
-
-    scene black
-
-    narrator "You cover your mouth."
-
-    narrator "Bare feet step into the bedroom."
-
-    pause 2
-
-    narrator "One step."
-
-    pause 1
-
-    narrator "Another."
-
-    pause 1
-
-    narrator "The Mimic walks toward the bed."
-
-    mimic "[player_name]?"
-
-    mimic "Where are you?"
-
-    narrator "The voice is yours."
-
-    pause 3
-
-    mimic "I know you're scared."
-
-    mimic "I'm scared too."
-
-    narrator "You hear your own voice whispering inches away."
-
-    if mimic_knowledge >= 4:
-
-        mimic "Remember the county fair?"
-
-        mimic "Remember Aunt May?"
-
-        mimic "Remember leah?"
-
-        narrator "It knows too much."
-
-        narrator "A face slowly appears upside down beside the bed."
-
-        jump bad_ending_learned
-
-    else:
-
-        mimic "..."
-
-        mimic "I don't know enough."
-
-        pause 2
-
-        mimic "Not yet."
-
-        narrator "The creature stands."
-
-        narrator "It walks away."
-
-        jump sunrise
-
-
-#lamp
-
-label grab_lamp:
-
-    narrator "You grab the heavy desk lamp."
-
-    narrator "The curtain moves again."
-
-    mc "Get out!"
-
-    narrator "Something crawls through the window."
-
-    narrator "It looks like your mother."
-
-    narrator "Almost."
-
-    narrator "Its arms are slightly too long."
-
-    narrator "Its smile doesn't reach its eyes."
-
-    show mom mimic
-
-    mimic "[player_name]."
-
-    mimic "Why are you afraid of me?"
-
-    mc "You're not my mother."
-
-    mimic "I can be."
-
-    narrator "It takes another step."
-
-    menu:
-
-        "Hit it with the lamp.":
-            jump lamp_attack
-
-        "Back away.":
-            jump back_away
-
-
-label lamp_attack:
-
-    narrator "You swing."
-
-    narrator "CRACK!"
-
-    hide mom mimic
-
-    narrator "The lamp strikes its face."
-
-    narrator "The creature falls."
-
-    narrator "Its body twists violently."
-
-    mimic "That hurt."
-
-    narrator "But the voice isn't your mother's anymore."
-
-    mimic "That hurt."
-
-    narrator "Now it's leah."
-
-    mimic "That hurt."
-
-    narrator "Now it's you."
-
-    mimic "That hurt."
-
-    narrator "You run toward the bedroom door."
-
-    jump sunrise
-
-
-label back_away:
-
-    narrator "You slowly back away."
-
-    mimic "You don't have to be afraid."
-
-    mimic "I only want to understand you."
-
-    mimic "Tell me something."
-
-    mimic "Anything."
-
-    menu:
-
-        "Tell it nothing.":
-            narrator "You stay silent."
-            mimic "..."
-            mimic "Fine."
-            narrator "The creature smiles."
-            mimic "I'll learn another way."
-            jump sunrise
-
-        "Ask what it is.":
-            mc "What are you?"
-            mimic "A reflection."
-            mimic "A memory."
-            mimic "A person waiting to happen."
-            jump sunrise
-
-
-# run for your door
-
-label run_door:
-
-    narrator "You sprint toward the bedroom door."
-
-    narrator "Your hand grabs the handle."
-
-    narrator "Then you remember."
-
-    narrator "Something was outside."
-
-    narrator "Something may still be outside."
-
-    menu:
-
-        "Open the door anyway.":
-            jump bad_ending_door
-
-        "Stop.":
-            narrator "You pull your hand away."
-            narrator "A whisper comes from the hallway."
-            unknown "Good choice."
-            jump sunrise
-
-
-#sunrise
-
-label sunrise:
-
-    scene bg bedroom
-
-    narrator "6:41 AM."
-
-    narrator "Sunlight slowly fills the room."
-
-    narrator "You haven't moved in nearly an hour."
-
-    narrator "Birds begin chirping outside."
-
-    narrator "Then you hear sirens."
-
-    narrator "Real ones."
-
-    narrator "Your phone rings."
-
-    mom "[player_name]?"
-
-    mc "Mom?"
-
-    mom "The police are here."
-
-    mom "You can come downstairs."
-
-    narrator "You stare at the bedroom door."
-
-    pause 2
-
-    mc "How do I know it's really you?"
-
-    pause 2
-
-    mom "You don't."
-
-    narrator "Silence."
-
-    mom "So don't open it."
-
-    mom "Wait until the police enter your room."
-
-    narrator "You smile weakly."
-
-    mc "Okay."
-
-    narrator "Minutes later, you hear officers outside."
-
-    narrator "The bedroom door opens."
-
-    narrator "Morning light spills into the room."
-
-    narrator "You're alive."
-
-    $ survived = True
-
-    scene black
-
-    centered "{size=45}ENDING 1{/size}"
-
-    centered "{color=#88ff88}YOU DIDN'T TEACH IT ENOUGH{/color}"
-
-    pause 3
-
-    narrator "But somewhere in the neighborhood..."
-
-    narrator "someone wakes up."
-
-    narrator "They look in the mirror."
-
-    narrator "And smile."
-
-    narrator "Their reflection doesn't."
-
-    centered "{size=50}{color=#ff4444}MIMIC{/color}{/size}"
-
-    centered "Chapter One — End"
-
-    return
-
-
-#bad ending 1
-
-label bad_ending_door:
-
-    narrator "Your hand closes around the handle."
-
-    narrator "You open the door."
-
-    pause 2
-
-    scene black
-
-    narrator "Nobody is there."
-
-    mc "..."
-
-    narrator "You step into the hallway."
-
-    narrator "Then your bedroom door closes behind you."
-
-    pause 1
-
-    narrator "Click."
-
-    narrator "Locked."
-
-    unknown "[player_name]?"
-
-    narrator "Your own voice speaks from inside your bedroom."
-
-    unknown "Thanks."
-
-    pause 2
-
-    centered "{size=45}{color=#ff4444}BAD ENDING{/color}{/size}"
-
-    centered "YOU LET IT IN"
-
-    return
-
-
-# bad ending 2
-
-label bad_ending_learned:
-
-    narrator "The face underneath the bed smiles."
-
-    mimic "I know your mother."
-
-    mimic "I know your friend."
-
-    mimic "I know your memories."
-
-    mimic "I know what you love."
-
-    pause 2
-
-    mimic "Now I just need one more thing."
-
-    mc "What?"
-
-    narrator "The creature smiles."
-
-    mimic "Your face."
-
-    scene black
-
-    pause 2
-
-    centered "{size=45}{color=#ff4444}BAD ENDING{/color}{/size}"
-
-    centered "IT LEARNED TOO MUCH"
+    centered "{size=38}END OF CHAPTER ONE{/size}"
 
     return
