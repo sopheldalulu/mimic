@@ -1,8 +1,4 @@
-﻿# =========================================================
-# THE BOY BENEATH THE MASK
-# Horror / Romance / Supernatural AU
-# Inspired by Hideo from The Mimic
-# =========================================================
+﻿#the face beneath his
 
 define h = Character("Hideo", color="#b7c5d8")
 define old_woman = Character("Old Woman", color="#d8c6aa")
@@ -12,9 +8,7 @@ default player_name = "Akari"
 
 define mc = Character("[player_name]", color="#e8b9c8")
 
-# ---------------------------------------------------------
-# VARIABLES
-# ---------------------------------------------------------
+#variables
 
 default hideo_affection = 0
 default suspicion = 0
@@ -26,14 +20,9 @@ default knows_rumor = False
 
 
 label start:
-
-    scene black
-    with fade
-
+    scene black with fade
     centered "{size=48}THE BOY BENEATH THE MASK{/size}"
-
     pause 2.0
-
     centered "{i}There are stories in old villages that no one tells after sunset.{/i}"
 
     pause 2.0
