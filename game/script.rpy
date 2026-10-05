@@ -200,19 +200,19 @@ label start:
 
     pause 2
 
-    play sound "knock.ogg"
+    play sound "knock.mp3"
 
     narrator "Knock."
 
     pause 1
 
-    play sound "knock.ogg"
+    play sound "knock.mp3"
 
     narrator "Knock."
 
     pause 1
 
-    play sound "knock.ogg"
+    play sound "knock.mp3"
 
     narrator "Knock."
 
@@ -519,13 +519,13 @@ label third_knock:
 
     narrator "12:41 AM."
 
-    play sound "knock.ogg"
+    play sound "knock.mp3"
 
     narrator "Knock."
 
     pause 1
 
-    play sound "knock.ogg"
+    play sound "knock.mp3"
 
     narrator "Knock."
 
