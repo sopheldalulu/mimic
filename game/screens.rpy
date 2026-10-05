@@ -350,6 +350,18 @@ style navigation_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
+style main_menu_button:
+    background None
+    hover_background None
+    xpadding 20
+    ypadding 8
+
+style main_menu_button_text:
+    size 28
+    color "#b8b8b8"
+    hover_color "#ffffff"
+    outlines [(2, "#000000", 0, 0)]
+
 screen main_menu():
     tag menu
 

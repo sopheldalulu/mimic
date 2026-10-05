@@ -1,12 +1,40 @@
-﻿#the face beneath his
+﻿# =========================================================
+# THE MIMIC: HIDEO AU
+# Horror / Romance / Supernatural Visual Novel
+#
+# Background files:
+# - shrine day.png
+# - forest night.png
+# - bedroom night.png
+# - house inside day.png
+#
+# Hideo sprites:
+# - hideo normal.png
+# - hideo odd.png
+# =========================================================
 
 
-#characters
+# ---------------------------------------------------------
+# IMAGE DEFINITIONS
+# ---------------------------------------------------------
+
+image bg shrine_day = "images/shrine day.jpeg"
+image bg forest_night = "images/forest night.jpeg"
+image bg bedroom_night = "images/bedroom night.jpeg"
+image bg house_inside_day = "images/house inside day.jpeg"
+
+image hideo normal = "images/hideo normal.png"
+image hideo odd = "images/hideo odd.png"
+
+
+# ---------------------------------------------------------
+# CHARACTERS
+# ---------------------------------------------------------
 
 define h = Character("Hideo", color="#b6c6d8")
-define oba = Character("Grandmother", color="#d9c2a0")
-define woman = Character("Village Woman", color="#c8b9b2")
+define grandma = Character("Grandmother", color="#d9c2a0")
 define ijo = Character("IJO Operator", color="#a8b5bc")
+define woman = Character("Village Woman", color="#c8b9b2")
 define unknown = Character("???", color="#9b8a8a")
 
 default player_name = "Akari"
@@ -14,35 +42,49 @@ default player_name = "Akari"
 define mc = Character("[player_name]", color="#e8b7c6")
 
 
-#variables
+# ---------------------------------------------------------
+# VARIABLES
+# ---------------------------------------------------------
 
 default hideo_affection = 0
 default suspicion = 0
 default courage = 0
 
 default trusted_hideo = False
-default asked_about_ijo = False
 default knows_about_gata = False
 default saw_hideo_secret = False
 default visited_shrine = False
 
 
-#start
+# =========================================================
+# START
+# =========================================================
 
 label start:
+
     scene black
     with fade
-    pause 1.0
-    centered "{size=52}THE MIMIC{/size}"
-    pause 1.5
-    centered "{size=28}A Hideo Story{/size}"
-    pause 2.0
-    centered "{i}There was a time when monsters were only stories.{/i}"
-    pause 2.0
-    centered "{i}That time is over.{/i}"
-    pause 2.5
 
-    #player name input
+    centered "{size=52}THE MIMIC{/size}"
+
+    pause 1.5
+
+    centered "{size=28}A Hideo Story{/size}"
+
+    pause 2.0
+
+    centered "{i}There was a time when monsters were only stories.{/i}"
+
+    pause 2.0
+
+    centered "{i}That time is over.{/i}"
+
+    pause 2.0
+
+
+    # -----------------------------------------------------
+    # PLAYER NAME
+    # -----------------------------------------------------
 
     $ player_name = renpy.input(
         "What is your name?",
@@ -56,117 +98,88 @@ label start:
         $ player_name = "Akari"
 
 
-    #lore intro
+    # =====================================================
+    # LORE INTRO
+    # =====================================================
 
     scene black
     with fade
 
     narrator "For generations, Japan told stories of supernatural beings known as yōkai."
 
-    narrator "Some were mischievous."
-
     narrator "Some were harmless."
 
-    narrator "Others were dangerous enough to turn entire villages into ghost stories."
+    narrator "Others were dangerous."
+
+    narrator "For most people, they were nothing more than folklore."
 
     pause 1.0
 
-    narrator "For most of modern history, they were treated as legends."
-
-    narrator "Folklore."
-
-    narrator "Stories parents told their children."
-
-    pause 1.5
-
     narrator "Then came 2022."
 
-    scene bg city_ruins
-    with dissolve
-
-    narrator "A catastrophic outbreak of yōkai forced the world to accept what had once been impossible."
+    narrator "A catastrophic outbreak of yōkai forced humanity to accept the impossible."
 
     narrator "The creatures from the old stories were real."
 
-    narrator "And humanity was not prepared for them."
+    narrator "And people were dying."
 
-    scene black
-    with fade
+    pause 1.0
 
-    narrator "In response, the Japanese government established a special organization."
+    narrator "In response, the Japanese government formed a specialized organization."
 
     centered "{b}BUREAU OF ANOMALOUS COUNTERMEASURES{/b}\n\n{size=42}IJO{/size}"
 
     pause 2.0
 
-    narrator "Its purpose was to investigate supernatural incidents..."
+    narrator "The IJO investigated supernatural incidents."
 
-    narrator "...contain dangerous anomalies..."
+    narrator "Contained dangerous entities."
 
-    narrator "...protect civilians..."
+    narrator "Protected civilians."
 
-    narrator "...and eliminate hostile yōkai."
-
-    pause 1.0
-
-    narrator "But the more the IJO studied them..."
-
-    narrator "...the more disturbing the truth became."
-
-    scene bg dark_corridor
-    with dissolve
-
-    narrator "Yōkai were not the only monsters."
-
-    narrator "Under certain circumstances..."
+    narrator "And eliminated hostile yōkai."
 
     pause 1.0
 
-    narrator "...humans could become monsters too."
+    narrator "But yōkai were not the only monsters."
 
-    centered "{size=44}GATA{/size}"
+    centered "{size=42}GATA{/size}"
 
-    narrator "The IJO discovered creatures known as Gata."
+    narrator "Some humans could transform."
 
-    narrator "Humans consumed by extreme rage and madness..."
+    narrator "Extreme rage and madness could distort the body and mind."
 
-    narrator "...their bodies transformed into mutated yōkai."
+    narrator "Turning a person into something barely recognizable."
 
-    narrator "Those mutations could continue."
+    narrator "A Gata."
 
-    narrator "Gata."
+    pause 1.0
 
-    narrator "Muki."
+    narrator "And sometimes..."
 
-    narrator "Shiki."
+    narrator "...the transformation didn't stop there."
 
-    pause 1.5
+    centered "{b}GATA → MUKI → SHIKI{/b}"
 
-    narrator "Each stage becoming something further removed from humanity."
-
-    scene black
-    with fade
+    pause 2.0
 
     narrator "Even after years of research..."
 
     narrator "there were still things the IJO didn't understand."
 
-    pause 1.0
-
     narrator "Old things."
 
-    narrator "Things hidden beneath mountains."
+    narrator "Things buried beneath villages and shrines."
 
-    narrator "Things sealed away long before the IJO existed."
+    narrator "Things that had existed long before the IJO."
 
     pause 2.0
 
     narrator "And sometimes..."
 
-    narrator "...the greatest danger was the thing standing beside you."
+    narrator "...the thing beside you was far more dangerous than the thing hiding in the dark."
 
-    pause 2.5
-
+    pause 2.0
 
     centered "{size=40}CHAPTER ONE{/size}\n\nThe Village in the Mountains"
 
@@ -175,881 +188,410 @@ label start:
     jump chapter_one
 
 
-#chapter one
+# =========================================================
+# CHAPTER ONE
+# =========================================================
 
 label chapter_one:
 
-    scene bg bus_rural_day
+    scene bg house_inside_day
     with fade
 
-    play music "audio/rural_day.ogg" fadein 2.0
+    narrator "You arrived at your grandmother's village that afternoon."
 
-    narrator "The bus had been climbing through the mountains for almost two hours."
+    narrator "The bus ride had taken hours."
 
-    narrator "Every few stops, another passenger disappeared."
+    narrator "Your phone lost signal halfway through the mountains."
 
-    narrator "Until eventually..."
-
-    narrator "...you were the only person left."
-
-    mc "..."
-
-    narrator "Your phone showed one bar."
-
-    narrator "Then none."
-
-    mc "Perfect."
-
-    narrator "Outside the window stretched endless cedar forests."
-
-    narrator "Rice fields."
-
-    narrator "Old wooden houses."
-
-    narrator "Stone statues darkened by rain and moss."
-
-    narrator "You hadn't visited this village since you were a child."
-
-    narrator "Your grandmother still lived here."
-
-    narrator "After months of begging you to visit..."
-
-    narrator "...you finally agreed to spend the summer with her."
+    narrator "By the time you reached the village, you were already regretting agreeing to spend the summer here."
 
     mc "One summer."
 
     mc "How bad could it be?"
 
-    scene black
+    narrator "Your grandmother had left the front door unlocked for you."
 
-    pause 0.5
+    narrator "Her house looked almost exactly the way you remembered it."
 
-    narrator "You would remember saying that."
+    narrator "Old wood."
 
-    pause 1.5
+    narrator "Tatami floors."
 
-    scene bg village_bus_stop
-    with fade
+    narrator "A faint smell of tea."
 
-    play sound "audio/bus_stop.ogg"
+    narrator "And absolutely no Wi-Fi."
 
-    narrator "The bus stopped beside an old wooden shelter."
+    mc "This is going to be a long summer."
 
-    narrator "You stepped onto the road."
+    h "Probably."
 
-    centered "{b}KIRISAME VILLAGE{/b}"
+    mc "!"
 
-    narrator "The sign looked older than you remembered."
-
-    play sound "audio/bus_leave.ogg"
-
-    narrator "The bus pulled away."
-
-    narrator "Its engine slowly disappeared down the mountain."
-
-    narrator "And then..."
-
-    pause 1.0
-
-    narrator "Silence."
-
-    mc "..."
-
-    mc "Okay."
-
-    mc "Grandma's house."
-
-    narrator "You unfold the directions she mailed you."
-
-    mc "\"Continue past the old shrine and turn at the persimmon tree.\""
-
-    mc "That's not an address."
-
-    h "It is around here."
-
-    narrator "You jump."
-
-    mc "Ah!"
-
-    show hideo neutral at right
+    show hideo normal at right
     with dissolve
 
-    narrator "A boy stands several feet behind you."
+    narrator "You spin around."
+
+    narrator "A boy is standing just outside the doorway."
 
     narrator "Black hair."
 
-    narrator "Relaxed expression."
+    narrator "Calm expression."
 
-    narrator "Hands in his pockets."
-
-    narrator "He looks around your age."
-
-    narrator "Maybe slightly older."
+    narrator "Hands casually in his pockets."
 
     narrator "You hadn't heard him approach."
 
+    mc "You scared me!"
+
     h "Sorry."
 
-    mc "You scared me."
+    narrator "He doesn't sound sorry."
 
-    h "Yeah."
+    mc "Do I know you?"
 
-    narrator "He doesn't seem very sorry."
+    narrator "He smiles slightly."
 
-    h "You're looking for the Fujimori house."
+    h "You used to."
 
-    mc "How did you know?"
-
-    h "You're holding directions to the Fujimori house."
-
-    narrator "You look down."
-
-    narrator "Your grandmother's name is written across the top."
-
-    mc "Oh."
-
-    narrator "The boy smiles."
-
-    h "I'm Hideo."
-
-    mc "[player_name]."
-
-    narrator "Something about his name feels familiar."
-
-    narrator "You search your memory."
-
-    mc "Wait."
+    mc "..."
 
     mc "Hideo?"
 
-    h "Hm?"
+    h "Took you long enough."
 
-    mc "Did we know each other when we were kids?"
+    narrator "The name pulls at an old memory."
 
-    narrator "His smile changes."
+    narrator "A boy you used to play with when you visited the village as a child."
 
-    narrator "Only slightly."
-
-    h "You remembered."
-
-    mc "Barely."
-
-    h "I'll try not to be offended."
-
-    mc "You look completely different."
+    mc "You look different."
 
     h "So do you."
 
-    mc "That's usually how growing up works."
+    mc "That's usually what happens when people grow up."
 
     h "Usually."
-
-    narrator "The word hangs strangely between you."
 
     mc "What does that mean?"
 
     h "Nothing."
 
-    h "Come on."
+    narrator "He smiles again."
 
-    h "I'll take you to your grandmother's."
+    narrator "Something about him feels familiar."
 
-    narrator "He starts walking."
+    narrator "But something else feels..."
 
-    mc "Are you always this bossy?"
+    pause 0.5
 
-    h "Only when people are lost."
+    narrator "...wrong."
 
 
-#first walk with hideo
-
-    scene bg village_path_day
-    with dissolve
-
-    show hideo neutral at right
-
-    narrator "You follow him deeper into the village."
-
-    narrator "Cicadas buzz loudly from the trees."
-
-    narrator "Wind chimes hang beneath tiled roofs."
-
-    narrator "A narrow irrigation canal runs beside the road."
-
-    narrator "Everything feels strangely untouched."
-
-    mc "This place hasn't changed at all."
-
-    h "Some things have."
-
-    mc "Like what?"
-
-    h "You'll notice."
+    # =====================================================
+    # FIRST CONVERSATION
+    # =====================================================
 
     menu:
 
-        "Ask about Hideo.":
-            $ hideo_affection += 1
+        "Tell him you're happy to see him.":
 
-            mc "What about you?"
-
-            h "What about me?"
-
-            mc "What have you been doing all these years?"
-
-            h "School."
-
-            h "Work."
-
-            mc "Very detailed."
-
-            h "I'm mysterious."
-
-            mc "You're annoying."
-
-            narrator "Hideo laughs quietly."
-
-        "Tell him you're glad to see him.":
             $ hideo_affection += 2
 
             mc "I'm actually glad you're still here."
 
-            narrator "Hideo looks at you."
+            narrator "Hideo looks surprised."
 
             h "Yeah?"
 
-            mc "At least I know one person."
-
-            narrator "For a moment, he looks genuinely surprised."
+            mc "At least I know someone."
 
             h "Then I'm glad you came back."
 
-        "Ask why the village is so empty.":
-            $ suspicion += 1
 
-            mc "Where is everyone?"
+        "Tease him.":
 
-            h "Home, probably."
-
-            mc "It's the middle of the afternoon."
-
-            h "People don't stay outside as much anymore."
-
-            mc "Why?"
-
-            pause 0.5
-
-            h "Things changed."
-
-
-# =========================================================
-# FIRST HINT OF THE OUTBREAK
-# =========================================================
-
-    narrator "You pass a house with wooden boards covering two windows."
-
-    mc "Was there a storm?"
-
-    h "No."
-
-    narrator "Another house has a red notice attached to its gate."
-
-    narrator "You recognize the government symbol immediately."
-
-    mc "Is that..."
-
-    narrator "You stop."
-
-    mc "IJO?"
-
-    show hideo serious at right
-
-    pause 0.5
-
-    h "Yeah."
-
-    mc "Why would the IJO be here?"
-
-    h "Routine inspections."
-
-    mc "The Bureau of Anomalous Countermeasures doesn't do routine inspections for fun."
-
-    h "You know about them?"
-
-    mc "Everyone knows about them."
-
-    mc "They're on the news constantly."
-
-    narrator "Hideo glances toward the house."
-
-    h "There were sightings a few months ago."
-
-    mc "Yōkai?"
-
-    h "Maybe."
-
-    menu:
-
-        "Ask what kind.":
-            $ asked_about_ijo = True
-            $ suspicion += 1
-
-            mc "What kind of yōkai?"
-
-            h "Nobody knows."
-
-            mc "That's reassuring."
-
-            h "You're safe."
-
-            mc "You sound awfully sure."
-
-            h "I am."
-
-        "Trust him.":
-            $ trusted_hideo = True
             $ hideo_affection += 1
 
-            mc "Okay."
+            mc "Still creepy, I see."
 
-            narrator "Hideo looks slightly surprised."
+            h "You remembered that too?"
 
-            h "That's it?"
+            mc "Unfortunately."
 
-            mc "What?"
-
-            h "You're trusting me?"
-
-            mc "Shouldn't I?"
-
-            narrator "He doesn't answer immediately."
-
-            h "Probably."
-
-        "Make a joke.":
-            $ hideo_affection += 1
-
-            mc "If a yōkai eats me, I'm blaming you."
-
-            h "That's fair."
-
-            mc "You don't seem concerned."
-
-            h "I'd stop it."
-
-            mc "Very heroic."
-
-            h "I have my moments."
+            narrator "Hideo laughs quietly."
 
 
-# =========================================================
-# DOG SCENE
-# =========================================================
+        "Ask why he came here.":
 
-    scene bg village_lane
+            $ suspicion += 1
+
+            mc "How did you even know I arrived?"
+
+            h "Small village."
+
+            mc "That's not an answer."
+
+            h "It's the only one you're getting."
+
+
+    # =====================================================
+    # SHRINE
+    # =====================================================
+
+    scene bg shrine_day
     with dissolve
 
-    show hideo neutral at right
+    show hideo normal at right
 
-    play sound "audio/dog_growl.ogg"
+    narrator "Later, Hideo offers to show you around."
 
-    narrator "A dog chained outside a nearby house suddenly growls."
+    narrator "The village itself isn't very large."
 
-    mc "Whoa."
+    narrator "A few houses."
 
-    narrator "Its fur stands on end."
+    narrator "Fields."
 
-    narrator "Its eyes aren't on you."
+    narrator "Dense forest."
 
-    narrator "They're fixed on Hideo."
+    narrator "And an old shrine sitting near the edge of the mountain."
 
-    play sound "audio/dog_bark.ogg"
+    mc "I remember this."
 
-    mc "I don't think he likes you."
+    narrator "The shrine looks older than everything around it."
 
-    h "He never has."
+    narrator "Its wood is dark."
+
+    narrator "Paper talismans hang from the entrance."
+
+    narrator "A thick rope stretches across part of the path."
+
+    mc "Didn't we play here when we were little?"
+
+    hide hideo normal
+    show hideo odd at right
+
+    h "Near here."
+
+    mc "Can we go inside?"
+
+    h "No."
 
     mc "Why?"
 
-    h "Bad personality, probably."
-
-    mc "Yours or his?"
-
-    h "Both."
-
-    narrator "You laugh."
-
-    narrator "The dog doesn't."
-
-    narrator "It pulls against the chain."
-
-    narrator "Whining."
-
-    narrator "Desperate to get farther away from Hideo."
-
-    mc "That's..."
-
-    pause 0.5
-
-    mc "...weird."
-
-    narrator "Hideo looks at the animal."
-
-    narrator "For just a second..."
-
-    narrator "his relaxed expression disappears."
-
-    h "Come on."
-
-
-# =========================================================
-# SHRINE
-# =========================================================
-
-    scene bg old_shrine_day
-    with dissolve
-
-    narrator "The road curves around the base of a forested hill."
-
-    narrator "Stone steps climb between the trees."
-
-    narrator "At the top stands an old shrine."
-
-    narrator "Its torii gate is faded."
-
-    narrator "Thick sacred rope hangs across part of the entrance."
-
-    narrator "Paper talismans flutter against the wooden posts."
-
-    mc "I remember this place."
-
-    show hideo serious at right
-
-    h "Do you?"
-
-    mc "Kind of."
-
-    mc "We used to play near here."
-
-    narrator "Hideo goes strangely quiet."
-
-    mc "Didn't we?"
-
-    h "Near it."
-
-    mc "Can we go up?"
-
-    h "No."
-
-    mc "Why not?"
-
     h "It's closed."
 
-    mc "There's no gate."
+    mc "There's nothing blocking the entrance."
 
-    h "That doesn't mean it's open."
+    h "That doesn't mean you should enter."
 
     mc "Hideo."
 
-    h "[player_name]."
+    narrator "His expression changes."
 
-    narrator "His tone is different now."
+    h "I'm serious."
 
-    narrator "Still quiet."
-
-    narrator "But serious."
-
-    h "Don't go up there."
+    h "Don't go inside that shrine."
 
     menu:
 
         "Listen to him.":
+
             $ hideo_affection += 2
             $ trusted_hideo = True
 
-            mc "Okay."
+            mc "Fine."
 
-            narrator "His shoulders relax slightly."
+            h "Thank you."
 
-            h "Thanks."
+            narrator "His expression softens."
 
-        "Ask what is there.":
+            hide hideo odd
+            show hideo normal at right
+
+
+        "Ask what's inside.":
+
             $ suspicion += 2
 
-            mc "What's up there?"
+            mc "What's in there?"
 
-            h "An old shrine."
+            h "Nothing you need to see."
 
-            mc "That's not what I meant."
+            mc "That sounds extremely suspicious."
 
-            h "I know."
+            h "It should."
 
-            mc "Then answer me."
 
-            pause 1.0
+        "Say you'll come back later.":
 
-            h "I can't."
-
-        "Say you'll go later.":
             $ courage += 1
             $ visited_shrine = True
 
-            mc "Fine."
+            mc "Maybe I'll come back without you."
 
-            mc "I'll explore it myself later."
+            narrator "Hideo immediately looks at you."
 
             h "Don't."
-
-            mc "You already said that."
-
-            h "I'm serious."
 
             mc "Why do you care?"
 
             pause 1.0
 
-            narrator "Hideo looks directly at you."
+            h "Because people disappear around here."
 
-            h "Because I don't want you disappearing too."
 
+    # =====================================================
+    # IJO DISCUSSION
+    # =====================================================
 
-# =========================================================
-# DISAPPEARANCES
-# =========================================================
+    mc "Disappear?"
 
-    mc "..."
+    narrator "Hideo looks toward the shrine."
 
-    mc "What do you mean, too?"
+    h "The IJO came here last winter."
 
-    narrator "Hideo looks away."
-
-    h "Forget I said that."
-
-    mc "Absolutely not."
-
-    h "There have been disappearances."
-
-    mc "Recently?"
-
-    h "Over the past year."
-
-    mc "And you're only mentioning this now?"
-
-    h "You just got here."
-
-    mc "How many people?"
-
-    h "I don't know."
-
-    narrator "The answer comes too quickly."
-
-    mc "You're lying."
-
-    h "Probably."
-
-    mc "Hideo!"
-
-    narrator "He gives you a faint smile."
-
-    h "Your grandmother's going to wonder where you are."
-
-    mc "You're changing the subject."
-
-    h "I'm very good at that."
-
-    mc "I'm noticing."
-
-
-# =========================================================
-# GRANDMOTHER'S HOUSE
-# =========================================================
-
-    scene bg grandmother_house_day
-    with dissolve
-
-    narrator "A traditional wooden house appears at the end of the lane."
-
-    mc "That's it."
-
-    show hideo neutral at right
-
-    h "See?"
-
-    h "Didn't get you lost."
-
-    mc "Congratulations."
-
-    mc "You've successfully walked down a road."
-
-    h "I expect a reward."
-
-    menu:
-
-        "\"How about dinner?\"":
-            $ hideo_affection += 3
-
-            mc "How about dinner?"
-
-            h "Dinner?"
-
-            mc "Grandma always cooks too much."
-
-            h "You're inviting me over already?"
-
-            mc "Don't make it weird."
-
-            narrator "He smiles."
-
-            h "Tomorrow."
-
-            mc "Tomorrow?"
-
-            h "I'll come get you."
-
-            mc "That sounds suspiciously like a date."
-
-            h "Maybe it is."
-
-            narrator "Your face feels suddenly warm."
-
-        "\"Thanks, Hideo.\"":
-            $ hideo_affection += 1
-
-            mc "Seriously."
-
-            mc "Thanks."
-
-            h "Anytime."
-
-        "\"You still owe me answers.\"":
-            $ suspicion += 1
-
-            mc "You still owe me answers."
-
-            h "I know."
-
-            mc "And?"
-
-            h "Ask me tomorrow."
-
-            mc "Why tomorrow?"
-
-            h "Because then I have until tomorrow to think of better lies."
-
-
-# =========================================================
-# GRANDMOTHER
-# =========================================================
-
-    hide hideo
-
-    show grandmother neutral at left
-
-    oba "[player_name]!"
-
-    narrator "Your grandmother steps onto the porch."
-
-    mc "Grandma!"
-
-    narrator "She wraps you in a hug."
-
-    oba "Look at you!"
-
-    oba "You've gotten so tall."
-
-    mc "You say that every time."
-
-    narrator "She notices Hideo."
-
-    oba "Oh."
-
-    pause 0.5
-
-    narrator "Something changes in her face."
-
-    oba "Hideo."
-
-    show hideo neutral at right
-
-    h "Good afternoon."
-
-    narrator "Your grandmother stares at him longer than necessary."
-
-    mc "He helped me find the house."
-
-    oba "Did he?"
-
-    h "She would've figured it out eventually."
-
-    mc "Probably not."
-
-    oba "You should come inside."
-
-    mc "Hideo too?"
-
-    oba "No."
-
-    narrator "The answer is immediate."
-
-    mc "Grandma?"
-
-    oba "His family will be expecting him."
-
-    narrator "Hideo doesn't seem offended."
-
-    h "She's right."
-
-    h "I'll see you tomorrow, [player_name]."
-
-    mc "Okay."
-
-    h "And remember what I told you."
-
-    mc "About the shrine?"
-
-    narrator "Your grandmother stiffens."
+    mc "The IJO?"
 
     h "Yeah."
 
-    narrator "He walks away."
+    mc "Why?"
 
-    narrator "Your grandmother watches him until he disappears."
+    h "Reports of yōkai."
+
+    mc "What kind?"
+
+    h "Mostly Gata."
+
+    mc "Mostly?"
+
+    h "That's what they said."
+
+    narrator "Something about the way he says it bothers you."
+
+    mc "You know more than you're telling me."
+
+    h "Probably."
+
+    mc "You're terrible."
+
+    h "I've been told."
+
+    mc "Are Gata still around?"
+
+    narrator "Hideo is quiet."
+
+    h "Sometimes."
+
+    mc "And nobody thought they should tell me this before I came here?"
+
+    h "Your grandmother probably didn't want to scare you."
+
+    mc "Are you scared?"
+
+    pause 0.5
+
+    h "No."
+
+    mc "You answered that way too fast."
+
+    h "Did I?"
 
 
-# =========================================================
-# GRANDMOTHER WARNING
-# =========================================================
+    # =====================================================
+    # BACK AT GRANDMOTHER'S HOUSE
+    # =====================================================
 
-    scene bg grandmother_house_inside
+    scene bg house_inside_day
     with dissolve
 
-    show grandmother serious
+    hide hideo odd
+    hide hideo normal
 
-    mc "Okay."
+    narrator "By the time you return to your grandmother's house, the sun is beginning to set."
 
-    mc "What was that?"
+    grandma "You were with Hideo."
 
-    oba "What?"
+    mc "Yeah."
 
-    mc "You looked at Hideo like he'd crawled out of a grave."
+    narrator "Your grandmother doesn't look pleased."
 
-    oba "[player_name]."
+    mc "What's wrong?"
 
-    mc "What?"
+    grandma "Nothing."
 
-    oba "You shouldn't spend too much time near that shrine."
+    mc "That's obviously not true."
 
-    mc "That's exactly what Hideo said."
-
-    narrator "Her expression darkens."
-
-    oba "Hideo said that?"
-
-    mc "Yes."
-
-    oba "..."
-
-    mc "Why is everyone being weird?"
-
-    oba "This village has changed."
-
-    mc "He said that too."
-
-    oba "People have disappeared."
-
-    mc "He told me."
-
-    oba "There have been..."
+    grandma "[player_name]..."
 
     narrator "She hesitates."
 
-    oba "...incidents."
+    grandma "Stay away from the shrine."
 
-    mc "Yōkai?"
+    mc "Hideo said the same thing."
 
     pause 1.0
 
-    oba "The IJO came last winter."
+    grandma "He did?"
 
-    mc "I saw one of their notices."
+    mc "Why is everyone being weird about it?"
 
-    oba "They said there were Gata nearby."
+    grandma "That place isn't safe anymore."
 
-    mc "Gata?"
+    mc "Because of the Gata?"
 
-    narrator "You recognize the name."
+    grandma "Partly."
 
-    narrator "Everyone does."
+    mc "Partly?"
 
-    oba "People."
-
-    oba "Or people who used to be people."
-
-    oba "Consumed by rage."
-
-    oba "Changed into something else."
-
-    $ knows_about_gata = True
-
-    mc "Did they find any here?"
-
-    oba "They wouldn't tell us."
-
-    mc "That's comforting."
-
-    oba "They searched the mountains."
-
-    oba "The shrine."
-
-    oba "Several abandoned houses."
+    grandma "The IJO searched the shrine last winter."
 
     mc "And?"
 
-    oba "Then they left."
+    grandma "They never told us what they found."
 
-    mc "So it's safe."
+    narrator "Your grandmother looks toward the window."
 
-    narrator "Your grandmother doesn't answer."
+    grandma "People started disappearing before they arrived."
 
-    mc "Grandma?"
+    mc "How many?"
 
-    oba "Lock your window tonight."
+    grandma "Enough."
+
+    narrator "You stare at her."
+
+    grandma "Lock your window tonight."
+
+    mc "What?"
+
+    grandma "Just do it."
 
 
-# =========================================================
-# NIGHT ONE
-# =========================================================
+    # =====================================================
+    # NIGHT
+    # =====================================================
 
     scene bg bedroom_night
     with fade
 
-    stop music fadeout 2.0
+    narrator "That night, you can't sleep."
 
-    play music "audio/night_ambience.ogg" fadein 2.0
+    narrator "The room is too quiet."
 
-    narrator "By midnight, the entire village is silent."
+    narrator "The village is too quiet."
 
-    narrator "No traffic."
+    narrator "No cars."
 
     narrator "No voices."
 
-    narrator "Only cicadas."
+    narrator "Just the occasional sound of insects outside."
 
-    narrator "And the occasional rustling of trees."
-
-    mc "..."
-
-    narrator "You lie awake staring at the ceiling."
-
-    narrator "Your grandmother's warning keeps replaying in your mind."
-
-    mc "\"Lock your window tonight.\""
-
-    mc "Very normal."
+    mc "This place is officially creepy."
 
     pause 1.0
 
-    play sound "audio/tap_window.ogg"
+    narrator "You turn over."
+
+    pause 1.0
 
     narrator "{i}Tap.{/i}"
 
@@ -1057,152 +599,125 @@ label chapter_one:
 
     pause 1.0
 
-    play sound "audio/tap_window.ogg"
-
     narrator "{i}Tap.{/i}"
 
-    narrator "You sit up."
+    narrator "The sound comes from your window."
 
-    mc "No."
+    mc "Nope."
 
-    narrator "Another sound."
-
-    play sound "audio/tap_window.ogg"
+    pause 1.0
 
     narrator "{i}Tap.{/i}"
-
-    narrator "From your window."
 
     menu:
 
         "Look outside.":
+
             $ courage += 1
-            jump look_outside
+
+            jump window_scene
+
 
         "Stay in bed.":
+
             jump stay_in_bed
 
 
 # =========================================================
-# WINDOW BRANCH
+# WINDOW SCENE
 # =========================================================
 
-label look_outside:
+label window_scene:
 
-    narrator "You slowly cross the room."
+    narrator "Against every instinct telling you not to..."
 
-    narrator "The curtain moves slightly in the night breeze."
+    narrator "you walk toward the window."
 
-    mc "I locked that..."
+    narrator "Your hand closes around the curtain."
+
+    mc "This is such a bad idea."
 
     narrator "You pull it aside."
 
-    scene bg window_forest_night
+    scene bg forest_night
     with dissolve
 
-    narrator "Nothing."
+    narrator "The forest is almost completely black."
 
-    narrator "Just the dark yard."
+    narrator "For a moment..."
 
-    narrator "Trees."
-
-    narrator "Moonlight."
-
-    narrator "Then..."
+    narrator "you see nothing."
 
     pause 1.0
 
-    narrator "Movement."
+    narrator "Then you notice someone standing between the trees."
 
     mc "..."
-
-    narrator "Someone is standing near the forest."
 
     narrator "A boy."
 
+    show hideo odd at right
+    with dissolve
+
     mc "Hideo?"
 
-    narrator "He is facing away from the house."
+    narrator "He is standing completely still."
 
-    narrator "Completely still."
+    narrator "Facing away from you."
 
-    mc "What is he doing?"
+    mc "What is he doing out there?"
 
-    narrator "Something moves in front of him."
+    narrator "Something shifts deeper in the forest."
 
     narrator "Something tall."
 
-    narrator "Too tall."
+    narrator "Something bent."
 
-    narrator "Its arms hang almost to the ground."
+    narrator "Something human-shaped..."
 
-    narrator "Its body bends forward at an unnatural angle."
+    narrator "...but not human."
 
     mc "..."
 
-    narrator "Your stomach drops."
+    narrator "A Gata."
 
-    mc "Gata."
+    narrator "You've seen pictures online."
 
-    narrator "You've seen photographs."
+    narrator "IJO warning videos."
 
-    narrator "News footage."
+    narrator "But seeing one in front of you is completely different."
 
-    narrator "IJO warnings."
+    narrator "Its limbs are too long."
 
-    narrator "You know what they look like."
+    narrator "Its movements are wrong."
 
-    narrator "But this is the first time you've seen one alive."
-
-    play sound "audio/creature_growl.ogg"
-
-    narrator "The creature twitches."
-
-    narrator "Hideo doesn't run."
-
-    narrator "He doesn't even step back."
+    narrator "It slowly approaches Hideo."
 
     mc "Hideo..."
 
-    narrator "The Gata moves toward him."
+    narrator "He doesn't move."
+
+    narrator "The creature stops."
 
     pause 1.0
 
-    scene black
+    narrator "Then something strange happens."
 
-    play sound "audio/impact.ogg"
+    narrator "The Gata backs away."
 
-    pause 0.5
+    mc "..."
 
-    narrator "You duck instinctively."
+    narrator "It's afraid."
 
-    mc "!"
-
-    pause 1.0
-
-    scene bg window_forest_night
-
-    narrator "When you look again..."
-
-    narrator "the Gata is gone."
-
-    narrator "Hideo is still standing there."
-
-    narrator "Alone."
-
-    narrator "He slowly turns."
+    narrator "Hideo slowly turns his head."
 
     narrator "Even from this distance..."
 
-    narrator "you know he is looking directly at your window."
-
-    pause 1.5
-
-    show hideo shadow
-
-    narrator "Then he raises one finger to his lips."
+    narrator "you know he's looking directly at you."
 
     h "..."
+
+    narrator "He raises one finger to his lips."
 
     narrator "{i}Don't say anything.{/i}"
 
@@ -1212,131 +727,108 @@ label look_outside:
     scene black
     with fade
 
-    jump morning_after
+    jump next_morning
 
 
 # =========================================================
-# STAY IN BED BRANCH
+# STAY IN BED
 # =========================================================
 
 label stay_in_bed:
 
-    narrator "No."
+    mc "Absolutely not."
 
-    narrator "Absolutely not."
-
-    narrator "You've watched enough horror movies to know how this works."
-
-    narrator "You pull the blanket higher."
-
-    play sound "audio/tap_window.ogg"
+    narrator "You pull the blanket over your head."
 
     narrator "{i}Tap.{/i}"
 
-    mc "Not happening."
+    mc "No."
 
     pause 1.0
 
-    narrator "The tapping stops."
+    narrator "The tapping suddenly stops."
 
     pause 2.0
 
-    play sound "audio/distant_scream.ogg"
+    narrator "Then..."
 
     narrator "A scream tears through the village."
 
     mc "..."
 
-    narrator "You stop breathing."
+    narrator "You freeze."
 
-    narrator "Then..."
+    narrator "After that..."
 
-    narrator "silence."
+    narrator "you don't sleep at all."
 
     scene black
     with fade
 
-    jump morning_after
+    jump next_morning
 
 
 # =========================================================
-# CHAPTER TWO
+# NEXT MORNING
 # =========================================================
 
-label morning_after:
+label next_morning:
 
-    scene bg village_morning
+    scene bg house_inside_day
     with fade
 
-    stop music fadeout 2.0
+    narrator "The next morning, your grandmother is listening to the radio."
 
-    play music "audio/rural_day.ogg" fadein 2.0
+    ijo "Residents are advised to remain indoors until further notice."
 
-    centered "{size=40}CHAPTER TWO{/size}\n\nThings That Shouldn't Be Here"
+    ijo "An anomalous entity was sighted near the eastern forest."
 
-    pause 2.0
-
-    narrator "By morning, the village is filled with police."
-
-    narrator "An ambulance blocks the main road."
-
-    narrator "Three men wearing black uniforms stand near one of the houses."
+    ijo "Do not approach the shrine."
 
     mc "..."
 
-    narrator "You recognize the insignia immediately."
+    grandma "You heard them."
 
-    centered "{b}IJO{/b}"
+    grandma "You're staying here."
 
-    narrator "Whatever happened last night..."
+    mc "Sure."
 
-    narrator "it wasn't an animal attack."
+    narrator "You have absolutely no intention of staying here."
 
-    show grandmother serious
+    narrator "A knock sounds at the door."
 
-    oba "Stay here."
+    grandma "Who is it?"
 
-    mc "Grandma—"
+    h "Hideo."
 
-    oba "Inside."
+    mc "..."
 
-    mc "I'm not twelve."
+    show hideo normal at right
+    with dissolve
 
-    oba "And that thing outside doesn't care how old you are."
-
-    narrator "Before you can answer..."
-
-    h "[player_name]."
-
-    hide grandmother
-
-    show hideo neutral at right
-
-    narrator "Hideo stands outside the gate."
+    narrator "He steps inside."
 
     narrator "He looks completely normal."
 
-    narrator "Clean clothes."
-
-    narrator "Calm expression."
-
-    narrator "No injuries."
+    narrator "Like nothing happened."
 
     if saw_hideo_secret:
 
-        narrator "Your eyes drop instinctively to his hands."
-
-        narrator "Nothing."
-
-        narrator "Not even a scratch."
-
         mc "You."
 
-        h "Me."
+        h "Morning."
 
-        mc "We need to talk."
+        mc "Don't 'morning' me."
 
-        h "I figured."
+        h "I figured this was coming."
+
+        mc "What were you doing in the forest?"
+
+        narrator "Hideo glances toward your grandmother."
+
+        h "Can we talk outside?"
+
+        mc "Absolutely."
 
     else:
 
@@ -1344,582 +836,249 @@ label morning_after:
 
         h "Yeah."
 
-        mc "Someone screamed last night."
+        mc "The IJO said there was something in the forest."
 
         h "I heard."
 
-    narrator "An IJO vehicle passes behind him."
+        mc "You don't seem worried."
 
-    mc "They came fast."
+        h "Should I be?"
 
-    h "They were already nearby."
+    narrator "Your grandmother watches Hideo carefully."
 
-    mc "How do you know?"
+    grandma "Don't go near the shrine."
 
-    narrator "Hideo pauses."
+    h "We won't."
 
-    h "Because..."
-
-    narrator "He reaches into his pocket."
-
-    narrator "And pulls out a black identification card."
-
-    mc "..."
-
-    narrator "The IJO insignia is printed across the front."
-
-    mc "No way."
-
-    h "It's complicated."
-
-    mc "You're IJO?"
-
-    h "Not officially."
-
-    mc "That does not make this less confusing."
-
-    h "I'm in training."
-
-    mc "Since when?"
-
-    h "A while."
-
-    mc "And you just forgot to mention that yesterday?"
-
-    h "You didn't ask."
-
-    mc "Hideo!"
-
-    narrator "He almost smiles."
-
-    h "There you are."
-
-    mc "What?"
-
-    h "You used to yell my name exactly like that."
-
-    narrator "You stare at him."
-
-    mc "You're unbelievable."
+    narrator "He says it too quickly."
 
 
-# =========================================================
-# ROMANCE MOMENT
-# =========================================================
+    # =====================================================
+    # PRIVATE TALK
+    # =====================================================
 
-    scene bg river_path_day
+    scene bg shrine_day
     with dissolve
 
-    show hideo neutral at right
+    show hideo normal at right
 
-    narrator "Hideo convinces your grandmother that you're safer with him than wandering around alone."
+    narrator "You and Hideo stop near the shrine."
 
-    narrator "Somehow..."
+    mc "Of all places, you brought me here?"
 
-    narrator "she agrees."
+    h "Nobody else is around."
 
-    narrator "The two of you walk beside the river."
-
-    mc "So."
-
-    mc "IJO."
-
-    h "Yeah."
-
-    mc "You fight yōkai."
-
-    h "Sometimes."
-
-    mc "Gata?"
-
-    h "Mostly lately."
-
-    mc "Aren't they dangerous?"
-
-    h "Very."
-
-    mc "And you're saying that like you're talking about mosquitoes."
-
-    h "Mosquitoes are worse."
-
-    mc "Hideo."
-
-    narrator "He laughs."
-
-    menu:
-
-        "Tell him you're worried about him.":
-            $ hideo_affection += 3
-
-            mc "I'm serious."
-
-            mc "You could get hurt."
-
-            narrator "Hideo's smile fades."
-
-            h "You're worried about me?"
-
-            mc "Obviously."
-
-            narrator "He looks away."
-
-            h "You shouldn't be."
-
-            mc "Why?"
-
-            pause 1.0
-
-            h "Because I'm harder to hurt than you think."
-
-        "Ask if he's killed one before.":
-            $ suspicion += 1
-
-            mc "Have you killed a Gata?"
-
-            h "Yeah."
-
-            mc "How many?"
-
-            h "Enough."
-
-            narrator "Something about his answer makes you stop asking."
-
-        "Tease him.":
-            $ hideo_affection += 2
-
-            mc "So you're secretly some cool government monster hunter."
-
-            h "Cool?"
-
-            mc "Don't get excited."
-
-            h "Too late."
-
-
-# =========================================================
-# HIDEO SECRET BUILDUP
-# =========================================================
-
-    narrator "You reach a small bridge."
-
-    narrator "Hideo stops."
-
-    h "[player_name]."
-
-    mc "Hm?"
-
-    h "Promise me something."
-
-    mc "Depends."
-
-    h "If the IJO tells you to leave the village..."
-
-    h "leave."
-
-    mc "What about you?"
-
-    h "Don't worry about me."
-
-    mc "That's not an answer."
-
-    h "It's the only one I have."
-
-    mc "What are you hiding?"
-
-    narrator "Hideo goes quiet."
+    mc "Comforting."
 
     if saw_hideo_secret:
 
         mc "I saw you last night."
 
-        narrator "His expression freezes."
+        h "I know."
 
         mc "There was a Gata."
 
-        mc "It was standing right in front of you."
+        h "Yeah."
 
-        mc "And then it disappeared."
+        mc "It was scared of you."
 
-        h "You shouldn't have looked."
+        narrator "Hideo looks away."
 
-        mc "That is your explanation?"
+        mc "Why?"
 
-        h "No."
+        h "I don't know."
 
-        mc "Then explain."
+        mc "You're lying."
 
-        narrator "Hideo looks toward the river."
+        h "Probably."
 
-        h "I can't."
+        mc "Stop doing that!"
 
-        mc "Can't or won't?"
+        hide hideo normal
+        show hideo odd at right
 
-        h "Both."
+        narrator "His expression changes."
+
+        h "You need to stop asking questions."
+
+        mc "Why?"
+
+        h "Because the more you know..."
+
+        pause 1.0
+
+        h "...the more dangerous this gets."
+
+        mc "For me?"
+
+        pause 1.0
+
+        h "For both of us."
 
     else:
 
-        mc "First the shrine."
+        mc "What is happening here?"
 
-        mc "Then the disappearances."
+        h "I told you."
 
-        mc "Now the IJO."
+        h "Gata."
 
-        mc "You know more than you're telling me."
+        mc "You also told me 'mostly Gata.'"
 
-        h "I do."
+        mc "So what else is here?"
 
-        mc "At least you're admitting it."
+        hide hideo normal
+        show hideo odd at right
 
-    narrator "He steps closer."
+        narrator "Hideo's expression darkens."
 
-    h "There are things happening here that you don't understand."
+        h "Something older."
 
-    mc "Then help me understand."
+        mc "Older than what?"
 
-    h "If I do..."
+        h "The IJO."
 
-    pause 1.0
+        mc "That's not helpful."
 
-    h "...you might stop looking at me the same way."
-
-    narrator "The playful Hideo from yesterday is gone."
-
-    narrator "For the first time..."
-
-    narrator "he looks afraid."
-
-    mc "Hideo..."
-
-    narrator "A radio crackles from his pocket."
-
-    play sound "audio/radio_static.ogg"
-
-    ijo "Unit Seven, respond."
-
-    narrator "Hideo immediately pulls away."
-
-    h "I have to go."
-
-    mc "Wait—"
-
-    h "Go home."
-
-    mc "Hideo!"
-
-    h "And stay away from the shrine."
-
-    narrator "He runs toward the main road."
-
-    narrator "Leaving you alone."
+        h "It's not supposed to be."
 
 
-# =========================================================
-# IJO INFORMATION SCENE
-# =========================================================
+    # =====================================================
+    # ROMANCE CHOICE
+    # =====================================================
 
-    scene bg village_checkpoint
-    with dissolve
+    menu:
 
-    narrator "You don't go home."
+        "Tell him you trust him.":
 
-    narrator "Obviously."
+            $ hideo_affection += 3
+            $ trusted_hideo = True
 
-    narrator "Instead, you follow the road toward the IJO checkpoint."
+            mc "I trust you."
 
-    narrator "Several black vehicles are parked near the village entrance."
+            narrator "Hideo stares at you."
 
-    narrator "Maps and warning notices cover a temporary command board."
+            h "You shouldn't."
 
-    narrator "One catches your attention."
+            mc "Maybe."
 
-    centered "{b}ANOMALOUS ENTITY CLASSIFICATION{/b}"
+            mc "But I do."
 
-    narrator "GATA — Stage One."
+            narrator "For once..."
 
-    narrator "Human origin."
+            narrator "Hideo doesn't have a clever response."
 
-    narrator "Associated with prolonged rage, madness, or severe negative emotional exposure."
+            hide hideo odd
+            show hideo normal at right
 
-    narrator "Low intelligence."
+            h "You're going to make this difficult."
 
-    narrator "Often hunts in groups."
 
-    narrator "Potential progression..."
+        "Tell him you're scared of him.":
 
-    centered "{b}GATA → MUKI → SHIKI{/b}"
+            $ suspicion += 2
+
+            mc "You're scaring me."
+
+            narrator "Hideo goes still."
+
+            hide hideo odd
+            show hideo normal at right
+
+            h "..."
+
+            h "I'm sorry."
+
+            narrator "For the first time..."
+
+            narrator "he genuinely sounds like he means it."
+
+
+        "Ask if he's even human.":
+
+            $ suspicion += 3
+
+            mc "Hideo."
+
+            mc "Are you even human?"
+
+            pause 2.0
+
+            hide hideo odd
+            show hideo normal at right
+
+            narrator "He smiles."
+
+            narrator "But it doesn't reach his eyes."
+
+            h "What do you think?"
+
+            mc "That's not an answer."
+
+            h "I know."
+
+
+    # =====================================================
+    # CLIFFHANGER
+    # =====================================================
+
+    narrator "Before you can continue..."
+
+    narrator "A bell rings from somewhere inside the shrine."
 
     mc "..."
 
-    narrator "Another notice shows a map."
+    mc "Was that you?"
 
-    narrator "Most of the red markings surround the mountain."
+    hide hideo normal
+    show hideo odd at right
 
-    narrator "And the abandoned shrine."
+    narrator "Every trace of warmth disappears from Hideo's face."
 
-    mc "Of course."
+    h "No."
 
-    narrator "You lean closer."
+    narrator "The bell rings again."
 
-    narrator "One handwritten note is circled."
+    narrator "Once."
 
-    centered "{i}Possible source beneath shrine complex.{/i}"
+    narrator "Twice."
 
-    mc "..."
+    narrator "Three times."
 
-    unknown "You shouldn't be reading that."
+    h "[player_name]."
 
-    narrator "You spin around."
+    mc "What?"
+
+    h "Run."
+
+    mc "What?"
+
+    h "NOW."
 
     scene black
-    with hpunch
-
-    pause 1.0
-
-    narrator "But before you can see who spoke..."
-
-    play sound "audio/scream_close.ogg"
-
-    narrator "A scream erupts from somewhere behind the houses."
-
-    narrator "Then gunfire."
-
-    play sound "audio/gunshots.ogg"
-
-    mc "Hideo..."
-
-    jump gata_attack
-
-
-# =========================================================
-# GATA ATTACK
-# =========================================================
-
-label gata_attack:
-
-    scene bg village_attack
     with fade
 
-    play music "audio/chase.ogg"
+    narrator "Something moves behind the shrine doors."
 
-    narrator "People run toward you."
+    narrator "Something scratches against the wood."
 
-    woman "GET INSIDE!"
+    narrator "And for the first time..."
 
-    mc "What's happening?!"
-
-    woman "GATA!"
-
-    play sound "audio/creature_growl.ogg"
-
-    narrator "Something crashes through a wooden fence."
-
-    narrator "A tall humanoid creature crawls into the road."
-
-    narrator "Its limbs are far too long."
-
-    narrator "Its skin is raw and distorted."
-
-    narrator "Its mouth opens wider than any human mouth should."
-
-    mc "..."
-
-    narrator "For one horrible moment..."
-
-    narrator "you notice scraps of clothing still hanging from its body."
-
-    narrator "Human clothing."
-
-    narrator "This thing used to be someone."
-
-    play sound "audio/gunshot.ogg"
-
-    narrator "A gunshot echoes."
-
-    narrator "The creature jerks backward."
-
-    show hideo serious at right
-    with dissolve
-
-    h "[player_name]!"
-
-    mc "Hideo!"
-
-    h "Get behind me!"
-
-    narrator "He raises a handgun."
-
-    play sound "audio/gunshot.ogg"
-
-    narrator "Another shot."
-
-    narrator "The Gata screams."
-
-    mc "You have a gun?!"
-
-    h "Not the best time!"
-
-    narrator "The creature charges."
-
-    h "MOVE!"
-
-    scene black
-    with hpunch
-
-    play sound "audio/impact.ogg"
+    narrator "you realize Hideo isn't watching the shrine."
 
     pause 1.0
 
-    narrator "You hit the ground."
-
-    narrator "When you look up..."
-
-    scene bg village_attack
-
-    narrator "Hideo is between you and the Gata."
-
-    narrator "The creature's claws have torn through his shirt."
-
-    mc "HIDEO!"
-
-    narrator "Blood stains the fabric."
-
-    narrator "The Gata lunges again."
+    narrator "He's watching you."
 
     pause 1.0
 
-    narrator "And then..."
+    narrator "Like he's afraid of what might happen..."
 
-    narrator "stops."
-
-    mc "..."
-
-    narrator "Its body trembles."
-
-    narrator "It stares at Hideo."
-
-    narrator "Not with hunger."
-
-    narrator "Not with rage."
-
-    pause 1.0
-
-    narrator "With fear."
-
-    narrator "Hideo slowly raises his head."
-
-    narrator "You can't see his face."
-
-    h "..."
-
-    narrator "The creature backs away."
-
-    mc "Hideo?"
-
-    narrator "His hand tightens around the gun."
-
-    narrator "For one fraction of a second..."
-
-    narrator "something about his silhouette looks wrong."
-
-    narrator "Too tall."
-
-    narrator "Too sharp."
-
-    narrator "Not human."
-
-    blink
-
-    narrator "Then it's gone."
-
-    narrator "Hideo fires."
-
-    play sound "audio/gunshot.ogg"
-
-    narrator "The Gata collapses."
-
-    stop music fadeout 2.0
-
-    narrator "Silence."
-
-    mc "..."
-
-    mc "Hideo."
-
-    narrator "He turns toward you."
-
-    show hideo hurt at right
-
-    h "Are you hurt?"
-
-    mc "No."
-
-    mc "But you are."
-
-    h "I'm fine."
-
-    mc "Your shirt is covered in blood!"
-
-    h "It's not as bad as it looks."
-
-    narrator "He takes one step."
-
-    narrator "Then another."
-
-    narrator "You see the torn fabric move."
-
-    mc "..."
-
-    narrator "There should be deep claw marks beneath it."
-
-    narrator "There aren't."
-
-    narrator "The skin is already closing."
-
-    mc "Hideo..."
-
-    narrator "His eyes meet yours."
-
-    pause 1.0
-
-    h "Don't."
-
-    mc "What are you?"
+    narrator "...if whatever is inside recognizes you."
 
     pause 2.0
 
-    narrator "He looks genuinely hurt by the question."
-
-    h "I don't know how to answer that."
-
-    scene black
-    with fade
-
-    centered "{i}That was the moment you understood.{/i}"
-
-    pause 1.5
-
-    centered "{i}The IJO wasn't the only one studying monsters.{/i}"
-
-    pause 1.5
-
-    centered "{i}Hideo had been studying them too.{/i}"
-
-    pause 1.5
-
-    centered "{i}Because somehow...{/i}"
-
-    pause 1.0
-
-    centered "{i}he was one of them.{/i}"
-
-    pause 3.0
-
-
-# =========================================================
-# END OF DEMO
-# =========================================================
-
-    centered "{size=42}END OF CHAPTER TWO{/size}"
+    centered "{size=42}END OF CHAPTER ONE{/size}"
 
     pause 2.0
 
